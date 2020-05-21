@@ -1,4 +1,4 @@
-# Baseplate Sample Project
+# 🏗 Baseplate Sample Project
 
 ## Instructions
 
