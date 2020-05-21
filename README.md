@@ -8,9 +8,17 @@
 
 1. Edit the `.env` file to change your database details
 
-1. Run `npm run bootstrap` to prepare the database and create your first user
+1. Setup the database and create your first user
 
-1. Run the app with `npm start`
+    ```sh
+    npm run bootstrap
+    ```
+
+1. Start the app
+
+    ```sh
+    npm start
+    ```
 
 1. Request an access token
 
