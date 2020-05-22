@@ -21,8 +21,6 @@
     ./node_modules/.bin/lerna bootstrap
     ```
 
-1. Ensure that the paths to the `require()` calls in [`index.js`](https://github.com/baseplatejs/sample-project/blob/master/index.js#L1) and [`bootstrap.js`](https://github.com/baseplatejs/sample-project/blob/master/bootstrap.js#L1) map to the directory where you installed the core app
-
 ## Running the project
 
 1. Clone this repository
@@ -31,6 +29,8 @@
     git clone git@github.com:baseplatejs/sample-project.git my-project
     cd my-project
     ```
+    
+1. Ensure that the paths to the `require()` calls in [`index.js`](https://github.com/baseplatejs/sample-project/blob/master/index.js#L1) and [`bootstrap.js`](https://github.com/baseplatejs/sample-project/blob/master/bootstrap.js#L1) map to the directory where you installed the core app    
 
 1. Edit the `.env` file to change your database details
 
