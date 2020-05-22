@@ -68,10 +68,10 @@
    {
      "type": "author",
      "data": {
-         "attributes": {
-           "firstName": "John",
-           "lastName": "Doe"
-         }
+       "attributes": {
+         "firstName": "John",
+         "lastName": "Doe"
+       }
      }
    }
    ```
