@@ -67,9 +67,11 @@
 
    {
      "type": "author",
-     "attributes": {
-       "firstName": "John",
-       "lastName": "Doe"
+     "data": {
+         "attributes": {
+           "firstName": "John",
+           "lastName": "Doe"
+         }
      }
    }
    ```
