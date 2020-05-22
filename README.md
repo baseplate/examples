@@ -1,10 +1,8 @@
 # 🏗 Baseplate Sample Project
 
-## Instructions
+## Installing the core
 
-### Installing the core
-
-Until we have npm packages to use as dependencies, you must install the core application and make the sample project use it.
+> 👉 Until we have npm packages to use as dependencies, you must install the core application and make the sample project use it
 
 1. Clone the core repository and install it (see [the README](https://github.com/baseplatejs/core) for more detailed instructions)
 
@@ -25,7 +23,7 @@ Until we have npm packages to use as dependencies, you must install the core app
 
 1. Ensure that the paths to the `require()` calls in [`index.js`](https://github.com/baseplatejs/sample-project/blob/master/index.js#L1) and [`bootstrap.js`](https://github.com/baseplatejs/sample-project/blob/master/bootstrap.js#L1) map to the directory where you installed the core app
 
-### Running the project
+## Running the project
 
 1. Clone this repository
 
