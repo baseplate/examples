@@ -5,7 +5,7 @@
 1. Clone the [core repository](https://github.com/baseplatejs/core) and follow the installation instructions found in the README
 
     ```sh
-    git clone git@github.com:baseplatejs/sample-project.git baseplate-core
+    git clone git@github.com:baseplatejs/core.git baseplate-core
     cd baseplate-core
     npm install
     lerna bootstrap
