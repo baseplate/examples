@@ -69,7 +69,7 @@
      "type": "author",
      "attributes": {
        "firstName": "John",
-       "lastName": "Doe
+       "lastName": "Doe"
      }
    }
    ```
