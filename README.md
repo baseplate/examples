@@ -49,7 +49,7 @@
 1. Request an access token
 
    ```
-   POST http://localhost:8123/base_user/token
+   POST http://localhost:8123/base_users/token
 
    {
      "grant_type": "password",
