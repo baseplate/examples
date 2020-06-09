@@ -13,11 +13,14 @@ baseplateServer
     port: process.env.SERVER_PORT,
   })
   .then(async () => {
-    const datastore = createDatastore();
+    const models = modelStore.getAll();
+    const queue = models.map(async (Model) => {
+      await Model.$__dbSetup();
 
-    await datastore.setup({ modelStore });
+      console.log("✅ Created table for model:", Model.handle);
+    });
 
-    console.log("✅ Created tables");
+    await Promise.all(queue);
 
     const User = modelStore.get("base_user");
     const user = new User({
