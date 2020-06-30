@@ -119,8 +119,4 @@ If you'd like to run the Baseplate core from source:
    npm run watch
    ```
 
-1. Start the sample project by supplying your own path to the core modules, pointing to their location on your local machine.
-
-   ```sh
-   PATH_SERVER=../baseplate/packages/server/dist PATH_POSTGRES=../baseplate/packages/postgres/dist npm start
-   ```
+1. Use [npm link](https://docs.npmjs.com/cli/link) to pull in the `@baseplate/*` modules from your local filesystem.
