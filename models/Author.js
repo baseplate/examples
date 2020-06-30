@@ -1,15 +1,22 @@
 module.exports = {
+  label: "Authors",
   fields: {
     firstName: {
       type: String,
+      label: "First name",
       required: true,
       minLength: 2,
-      maxLength: 15
+      maxLength: 15,
     },
-    lastName: String,
+    lastName: { type: String, label: "Last name" },
     address: {
-      street: String,
-      door: Number
-    }
-  }
-}
+      label: "Address",
+      type: {
+        street: {
+          type: String,
+        },
+        city: String,
+      },
+    },
+  },
+};

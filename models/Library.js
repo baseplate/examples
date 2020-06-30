@@ -3,21 +3,19 @@ module.exports = {
     name: {
       type: String,
       required: true,
-      validate: input => !input.startsWith('X'),
-      errorMessage: 'Must not start with an X'
+      validate: (input) => !input.startsWith("X"),
+      errorMessage: "Must not start with an X",
     },
     city: String,
-    books: ['Book'],
-    owner: 'Author',
-    owner2: 'Author'
+    books: ["Book"],
   },
   virtuals: {
     whatever: {
       async get() {
         return {
-          hello: 'there'
-        }
-      }
-    }
-  }
-}
+          hello: "there",
+        };
+      },
+    },
+  },
+};

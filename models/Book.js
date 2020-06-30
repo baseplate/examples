@@ -2,9 +2,9 @@ module.exports = {
   fields: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     isbn: String,
-    author: 'Author'
-  }
-}
+    author: "Author",
+  },
+};

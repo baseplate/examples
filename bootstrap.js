@@ -1,4 +1,7 @@
-const baseplateServer = require("../baseplate-core/packages/server");
+const {
+  default: baseplateServer,
+} = require("../baseplate-core/packages/server");
+const baseplateMongo = require("../baseplate-core/packages/mongodb");
 const {
   createDatastore,
   modelStore,
@@ -8,6 +11,7 @@ const USERNAME = "baseplate";
 const PASSWORD = "baseplate";
 
 baseplateServer
+  .attach(baseplateMongo)
   .start({
     host: process.env.SERVER_HOST,
     port: process.env.SERVER_PORT,

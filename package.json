@@ -13,5 +13,10 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "@baseplate/mongodb": "^0.2.1",
+    "@baseplate/postgres": "^0.2.7",
+    "@baseplate/server": "^0.2.1"
   }
 }
