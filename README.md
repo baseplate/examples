@@ -42,7 +42,7 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
 1. Run the bootstrap script.
 
    ```sh
-   npm run bootstrap
+   DATABASE=@baseplate/postgres npm run bootstrap
    ```
 
 ### Using MongoDB
@@ -55,15 +55,15 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
 1. Run the bootstrap script.
 
    ```sh
-   npm run bootstrap
+   DATABASE=@baseplate/mongodb npm run bootstrap
    ```
 
 ## Running the project
 
-1. Start the app
+1. Start the app. You must set a `DATABASE` environment variable with the name of the database module of your choice (i.e. `@baseplate/mongodb` or `@baseplate/postgres`).
 
    ```sh
-   npm start
+   DATABASE=@baseplate/postgres npm start
    ```
 
 1. Request an access token

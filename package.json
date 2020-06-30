@@ -15,6 +15,7 @@
     "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "@baseplate/core": "^0.2.5",
     "@baseplate/mongodb": "^0.2.1",
     "@baseplate/postgres": "^0.2.7",
     "@baseplate/server": "^0.2.1"
