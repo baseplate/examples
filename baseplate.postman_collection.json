@@ -1,0 +1,743 @@
+{
+	"info": {
+		"_postman_id": "054a6cc2-57c9-400d-84a2-f406546a8b29",
+		"name": "Baseplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Authenticate admin user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a16c4454-ea58-4913-add8-51766a98fa84",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"grant_type\": \"password\",\n\t\"username\": \"baseplate\",\n\t\"password\": \"baseplate\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8123/base_users/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8123",
+							"path": [
+								"base_users",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate regular user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "20a93365-c52b-47c7-bfcd-a91b0915557d",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"grant_type\": \"password\",\n\t\"username\": \"{{lastRegularUserUsername}}\",\n\t\"password\": \"{{lastRegularUserPassword}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8123/base_users/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8123",
+							"path": [
+								"base_users",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create regular user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17e175b0-8d56-4c65-b255-ba50320aa645",
+								"exec": [
+									"const SDK = require('postman-collection');",
+									"",
+									"pm.environment.set(",
+									"    \"lastRegularUserUsername\",",
+									"    SDK.Property.replaceSubstitutions(\"{{$randomEmail}}\")",
+									");",
+									"pm.environment.set(",
+									"    \"lastRegularUserPassword\",",
+									"    SDK.Property.replaceSubstitutions(\"{{$randomPassword}}\")",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"base_user\",\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"accessLevel\": \"user\",\n\t\t\t\"username\": \"{{lastRegularUserUsername}}\",\n\t\t\t\"password\": \"{{lastRegularUserPassword}}\"\n\t\t}\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8123/base_users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8123",
+							"path": [
+								"base_users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8123/base_users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8123",
+							"path": [
+								"base_users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "JSON:API",
+			"item": [
+				{
+					"name": "Model: Author",
+					"item": [
+						{
+							"name": "Create author",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "aa865c35-f4dc-41cc-b9c4-fc35073a4732",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5d38b1a5-3f0f-43b6-9bdf-fe1c47ebbc21",
+										"exec": [
+											"const response = JSON.parse(responseBody);",
+											"",
+											"postman.setEnvironmentVariable(\"lastAuthorId\", response.data[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"author\",\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"firstName\": \"{{$randomFirstName}}\",\n\t\t\t\"lastName\": \"{{$randomLastName}}\",\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"{{$randomStreetAddress}}\",\n\t\t\t\t\"city\": \"{{$randomCity}}\"\n\t\t\t}\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/authors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List all authors",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"author\",\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"lastName\": \"Doe\"\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/authors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Model: Book",
+					"item": [
+						{
+							"name": "List all books",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"author\",\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"lastName\": \"Doe\"\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/books",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create book",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "04b1e6a5-3e1c-4c5f-b7be-7fea5a500614",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "9f8e5add-ab34-43fe-984e-4e2b7596d384",
+										"exec": [
+											"const response = JSON.parse(responseBody);",
+											"",
+											"postman.setEnvironmentVariable(\"lastAuthorId\", response.data[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"book\",\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"title\": \"{{$randomCatchPhrase}}\",\n\t\t\t\"isbn\": \"{{$randomBankAccount}}\"\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"author\": {\n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"author\",\n\t\t\t\t\t\"id\": \"{{lastAuthorId}}\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/books",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"books"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GraphQL",
+			"item": [
+				{
+					"name": "Model: Author",
+					"item": [
+						{
+							"name": "Create author",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2f17f379-daad-46b9-a346-12cdbed3e1ec",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "f7ad4916-1d11-4acd-9363-2708a05ba9c8",
+										"exec": [
+											"const response = JSON.parse(responseBody);",
+											"",
+											"postman.setEnvironmentVariable(\"lastAuthorId\", response.data.createAuthor._id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation CreateAuthor {\n    createAuthor(firstName: \"{{$randomFirstName}}\", lastName: \"{{$randomLastName}}\") {\n        _id\n        _createdAt\n        firstName\n        lastName\n    }\n}",
+										"variables": ""
+									},
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List all authors",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\n    Authors {\n        _id\n        firstName\n        lastName\n    }\n}",
+										"variables": ""
+									},
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Model: Book",
+					"item": [
+						{
+							"name": "List all books",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"type\": \"author\",\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"lastName\": \"Doe\"\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/books",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create book",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e96f77ab-1ba1-4235-b0de-5e8fe117c5e5",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "94a87a76-1b85-4300-8223-f7ebb084c327",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "# (!) TO DO: Adding an author makes this fail. The syntax for\n# adding a reference value needs to be defined and implemented.\nmutation CreateBook {\n    createBook(title: \"{{$randomCatchPhrase}}\", isbn: \"{{$randomBankAccount}}\") {\n        _id\n        _createdAt\n        title\n        isbn\n        author {\n            _id\n            firstName\n            lastName\n        }\n    }\n}",
+										"variables": ""
+									},
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update book title",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "95200869-e8c7-4d89-85ad-59d9cc715a7b",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "75d7d40e-17d8-4670-8476-e46dd028d9de",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "# (!) TO DO: Adding an author makes this fail. The syntax for\n# adding a reference value needs to be defined and implemented.\nmutation UpdateBook {\n    updateBook(_id: \"{{lastBookId}}\", title: \"{{$randomCatchPhrase}}\", isbn: \"{{$randomBankAccount}}\") {\n        _id\n        _createdAt\n        title\n        isbn\n        author {\n            _id\n            firstName\n            lastName\n        }\n    }\n}",
+										"variables": ""
+									},
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8123/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8123",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

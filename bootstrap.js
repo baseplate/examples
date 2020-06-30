@@ -1,4 +1,7 @@
-const baseplateServer = require("../baseplate-core/packages/server");
+const {
+  default: baseplateServer,
+} = require("../baseplate-core/packages/server");
+const baseplateMongo = require("../baseplate-core/packages/mongodb");
 const {
   createDatastore,
   modelStore,
@@ -8,16 +11,20 @@ const USERNAME = "baseplate";
 const PASSWORD = "baseplate";
 
 baseplateServer
+  .attach(baseplateMongo)
   .start({
     host: process.env.SERVER_HOST,
     port: process.env.SERVER_PORT,
   })
   .then(async () => {
-    const datastore = createDatastore();
+    const models = modelStore.getAll();
+    const queue = models.map(async (Model) => {
+      await Model.$__dbSetup();
 
-    await datastore.setup({ modelStore });
+      console.log("✅ Created table for model:", Model.handle);
+    });
 
-    console.log("✅ Created tables");
+    await Promise.all(queue);
 
     const User = modelStore.get("base_user");
     const user = new User({
