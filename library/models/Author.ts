@@ -12,12 +12,14 @@ export default class Author extends BaseModel {
       minLength: 1,
       maxLength: 85,
     },
+
     // Same as {type: String}.
     lastName: String,
     gender: {
       type: String,
       enum: ["Male", "Female", "Other"],
     },
+
     // You can have nested fields.
     address: {
       // ... as deeply as you want.
