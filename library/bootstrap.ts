@@ -13,7 +13,7 @@ const PASSWORD = "baseplate";
   const { modelStore } = baseplateApp;
   const models = modelStore.getAll();
   const queue = models.map(async (Model) => {
-    await Model.base$onModelCreate();
+    await Model.base$onBootstrap();
 
     console.log("✅ Created table for model:", Model.base$handle);
   });
