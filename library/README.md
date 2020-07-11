@@ -22,8 +22,6 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
 
 ## Setting up the database
 
-### Using PostgreSQL
-
 1. Run `psql` to open the PostgreSQL console and type the following.
 
    ```sql
@@ -42,34 +40,21 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
 1. Run the bootstrap script.
 
    ```sh
-   DATABASE=@baseplate/postgres npm run bootstrap
-   ```
-
-### Using MongoDB
-
-1. Edit the `.env` file and set the following environment variables.
-
-   - `MONGODB_DATABASE`: The database name (e.g. `bp_dev`)
-   - `MONGODB_HOST`: The database host and port (e.g. `localhost:27017`)
-
-1. Run the bootstrap script.
-
-   ```sh
-   DATABASE=@baseplate/mongodb npm run bootstrap
+   npm run bootstrap
    ```
 
 ## Running the project
 
-1. Start the app. You must set a `DATABASE` environment variable with the name of the database module of your choice (i.e. `@baseplate/mongodb` or `@baseplate/postgres`).
+1. Start the app
 
    ```sh
-   DATABASE=@baseplate/postgres npm start
+   npm run watch
    ```
 
 1. Request an access token
 
    ```
-   POST http://localhost:8123/base_users/token
+   POST http://localhost:8123/base$users/token
 
    {
      "grant_type": "password",

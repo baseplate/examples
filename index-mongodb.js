@@ -1,11 +1,11 @@
-if (!process.env.DATABASE) {
-  throw new Error(
-    "You must specify a database package using the DATABASE environment variable (e.g. `DATABASE=@baseplate/mongodb npm start`)"
-  );
-}
-
 const { default: baseplateServer } = require("@baseplate/server");
-const baseplateApp = require(process.env.DATABASE);
+const baseplateApp = require("@baseplate/mongodb");
+
+baseplateApp.load([
+  require("./models/Author"),
+  require("./models/Book"),
+  require("./models/Library"),
+]);
 
 baseplateServer
   .attach(baseplateApp)
