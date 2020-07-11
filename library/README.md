@@ -1,4 +1,6 @@
-# 🏗 Baseplate Sample Project
+# Example Project: Library
+
+> TypeScript + PostgreSQL
 
 ## Installing the core application
 
