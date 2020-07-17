@@ -1,10 +1,20 @@
-import * as baseplateApp from "@baseplate/postgres";
+import * as baseplateApp from "@baseplate/mongodb";
+import { config as dotEnvConfig } from "dotenv";
 
-import Author from "./models/Author";
-import Book from "./models/Book";
-import Genre from "./models/Genre";
+dotEnvConfig();
 
-baseplateApp.initialize([Author, Book, Genre]);
+import Actor from "./models/Actor";
+import Director from "./models/Director";
+import Movie from "./models/Movie";
+import Producer from "./models/Producer";
+import Stunt from "./models/Stunt";
+
+baseplateApp.initialize([Actor, Director, Movie, Producer, Stunt], {
+  database: {
+    name: process.env.MONGODB_DATABASE,
+    uri: process.env.MONGODB_URI,
+  },
+});
 
 const USERNAME = "baseplate";
 const PASSWORD = "baseplate";

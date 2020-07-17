@@ -1,6 +1,6 @@
-# 📚 Library
+# 📽 Movies
 
-> A Baseplate example project using PostgreSQL
+> A Baseplate example project using MongoDB
 
 ## Installing the core application
 
@@ -24,22 +24,12 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
 
 ## Setting up the database
 
-1. Install PostgreSQL on your system. The minimum required version is 9.4.
-
-1. Run `psql` to open the PostgreSQL console and type the following.
-
-   ```sql
-   CREATE DATABASE baseplate_dev;
-   \c baseplate_dev;
-   CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-   ```
+1. Install [MongoDB](https://www.mongodb.com/) on your system.
 
 1. Edit the `.env` file and set the following environment variables.
 
-   - `PGDATABASE`: The database name (e.g. `baseplate_library`)
-   - `PGHOST`: The database host (e.g. `localhost`)
-   - `PGUSER`: The database username (e.g. `bp_dev`)
-   - `PGPASSWORD`: The database password (e.g. `bp_dev`)
+   - `MONGODB_NAME`: The database name (e.g. `baseplate_movies`)
+   - `MONGODB_URI`: The database URI, including protocol, hostname and port (e.g. `mongodb://localhost:27017`)
 
 1. Run the bootstrap script.
 
@@ -70,16 +60,16 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
 1. Create your first record
 
    ```
-   POST http://localhost:8123/authors
+   POST http://localhost:8123/actors
 
    Authorization: Bearer <your-access-token>
 
    {
-     "type": "author",
+     "type": "actor",
      "data": {
        "attributes": {
-         "firstName": "John",
-         "lastName": "Doe"
+         "name": "Marilyn Monroe",
+         "birthName": "Norma Jeane Mortenson"
        }
      }
    }
