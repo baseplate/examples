@@ -1,16 +1,16 @@
-import * as baseplateApp from "@baseplate/postgres";
+import * as baseplateCore from "@baseplate/postgres";
 
 import Author from "./models/Author";
 import Book from "./models/Book";
 import Genre from "./models/Genre";
 
-baseplateApp.initialize([Author, Book, Genre]);
+baseplateCore.initialize({ models: [Author, Book, Genre] });
 
 const USERNAME = "baseplate";
 const PASSWORD = "baseplate";
 
 (async () => {
-  const { modelStore } = baseplateApp;
+  const { modelStore } = baseplateCore;
   const models = modelStore.getAll();
   const queue = models.map(async (Model) => {
     await Model.base$sync();
