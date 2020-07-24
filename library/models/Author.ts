@@ -1,7 +1,7 @@
 import { BaseModel } from "@baseplate/postgres";
 
 export default class Author extends BaseModel {
-  static fields = {
+  static base$fields = {
     // Some constraints, like `required`, work with any field, whereas others
     // vary with the type of the field. For example, String fields have things
     // like `minLength` and `maxLength`.
