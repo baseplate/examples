@@ -10,11 +10,14 @@ import Movie from "./models/Movie";
 import Producer from "./models/Producer";
 import Stunt from "./models/Stunt";
 
+import * as getMovieRatings from "./endpoints/getMovieRatings";
+
 baseplateCore.initialize({
   database: {
     name: process.env.MONGODB_DATABASE,
     uri: process.env.MONGODB_URI,
   },
+  endpoints: [getMovieRatings],
   models: [Actor, Director, Movie, Producer, Stunt],
 });
 

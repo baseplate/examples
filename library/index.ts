@@ -5,7 +5,12 @@ import Author from "./models/Author";
 import Book from "./models/Book";
 import Genre from "./models/Genre";
 
-baseplateCore.initialize({ models: [Author, Book, Genre] });
+import * as getBookRatings from "./endpoints/getBookRatings";
+
+baseplateCore.initialize({
+  endpoints: [getBookRatings],
+  models: [Author, Book, Genre],
+});
 
 baseplateServer(baseplateCore)
   .start({
