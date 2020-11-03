@@ -5,6 +5,9 @@ export default {
     title: {
       type: String,
       required: true,
+      search: {
+        weight: 5,
+      },
     },
     isbn: Number,
 

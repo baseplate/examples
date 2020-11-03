@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse } from "@baseplate/postgres";
+import { HttpRequest, HttpResponse } from "@baseplate/mongodb";
 
 export const route = "/ratings/:bookId";
 

@@ -1,7 +1,7 @@
 import { BaseModel } from "@baseplate/mongodb";
 
 export default class Actor extends BaseModel {
-  static fields = {
+  static base$fields = {
     // Some constraints, like `required`, work with any field, whereas others
     // vary with the type of the field. For example, String fields have things
     // like `minLength` and `maxLength`.
@@ -10,8 +10,9 @@ export default class Actor extends BaseModel {
       label: "Name",
       required: true,
       unique: true,
-      minLength: 1,
+      minLength: "as",
       maxLength: 85,
+      validate: (input: string) => input.startsWith("hello"),
     },
 
     // Same as {type: String}.

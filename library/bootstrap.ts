@@ -1,10 +1,16 @@
-import * as baseplateCore from "@baseplate/postgres";
+import * as baseplateCore from "@baseplate/mongodb";
 
 import Author from "./models/Author";
 import Book from "./models/Book";
 import Genre from "./models/Genre";
 
-baseplateCore.initialize({ models: [Author, Book, Genre] });
+baseplateCore.initialize({
+  database: {
+    name: "baseplate_library",
+    uri: "mongodb://localhost:27017",
+  },
+  models: [Author, Book, Genre],
+});
 
 const USERNAME = "baseplate";
 const PASSWORD = "baseplate";

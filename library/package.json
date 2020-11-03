@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@baseplate/core": "file:../../baseplate-core/packages/core",
-    "@baseplate/postgres": "file:../../baseplate-core/packages/db-postgresql",
+    "@baseplate/mongodb": "file:../../baseplate-core/packages/db-mongodb",
     "@baseplate/server": "file:../../baseplate-core/packages/server"
   }
 }

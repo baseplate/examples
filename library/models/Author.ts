@@ -1,4 +1,4 @@
-import { BaseModel } from "@baseplate/postgres";
+import { BaseModel } from "@baseplate/mongodb";
 
 export default class Author extends BaseModel {
   static base$fields = {
@@ -11,7 +11,12 @@ export default class Author extends BaseModel {
       required: true,
       minLength: 1,
       maxLength: 85,
+      search: {
+        weight: 5,
+      },
     },
+
+    favouriteGenre: "Genre",
 
     // Same as {type: String}.
     lastName: String,
@@ -24,8 +29,17 @@ export default class Author extends BaseModel {
     address: {
       // ... as deeply as you want.
       streetAddress: {
-        line1: String,
+        line1: {
+          type: String,
+          search: {
+            weight: 2,
+          },
+        },
         line2: String,
+        line3: {
+          part1: String,
+          part2: Number,
+        },
       },
       streetAddress2: {
         type: String,
@@ -44,4 +58,6 @@ export default class Author extends BaseModel {
       country: String,
     },
   };
+
+  //static base$index = [{ fields: { city: -1, state: 1 }, sparse: true }];
 }
