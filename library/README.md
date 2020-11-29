@@ -1,53 +1,33 @@
 # 📚 Library
 
-> A Baseplate example project using PostgreSQL
+> A Baseplate example project using MongoDB
 
-## Installing the core application
+## Installation
 
-Baseplate is currently published as a set of [private GitHub packages](https://github.com/orgs/baseplate/packages). Follow the steps below to configure your npm client to use the GitHub registry and install the Baseplate core.
+1. Install [MongoDB](https://www.mongodb.com/) on your system.
 
-1. Generate a [personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) for your GitHub account.
+1. Edit the `.env` file and set the following environment variables.
 
-1. Sign in to the GitHub registry. You'll be asked for your GitHub username, email address, and the personal access token generated in step 1.
+   - `MONGODB_NAME`: The database name (e.g. `baseplate_movies`)
+   - `MONGODB_URI`: The database URI, including protocol, hostname and port (e.g. `mongodb://localhost:27017`)
 
-   ```sh
-   npm login --registry=https://npm.pkg.github.com
-   ```
-
-   > 👉 This will not sign you out of your regular npm account or affect it in any way.
-
-1. Install the modules.
+1. Install the dependencies
 
    ```sh
    npm install
    ```
 
-## Setting up the database
-
-1. Install PostgreSQL on your system. The minimum required version is 9.4.
-
-1. Run `psql` to open the PostgreSQL console and type the following.
-
-   ```sql
-   CREATE DATABASE baseplate_dev;
-   \c baseplate_dev;
-   CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-   ```
-
-1. Edit the `.env` file and set the following environment variables.
-
-   - `PGDATABASE`: The database name (e.g. `baseplate_library`)
-   - `PGHOST`: The database host (e.g. `localhost`)
-   - `PGUSER`: The database username (e.g. `bp_dev`)
-   - `PGPASSWORD`: The database password (e.g. `bp_dev`)
-
-1. Run the bootstrap script.
+1. Run the bootstrap script to initialise the database collections
 
    ```sh
    npm run bootstrap
    ```
 
-## Running the project
+1. If you'd like some automatically-generated test data, run the data generator script
+
+   ```sh
+   npm run generate
+   ```
 
 1. Start the app
 
@@ -67,22 +47,12 @@ Baseplate is currently published as a set of [private GitHub packages](https://g
    }
    ```
 
-1. Create your first record
+1. Access a model
 
    ```
-   POST http://localhost:8123/authors
+   GET http://localhost:8123/books
 
    Authorization: Bearer <your-access-token>
-
-   {
-     "type": "author",
-     "data": {
-       "attributes": {
-         "firstName": "John",
-         "lastName": "Doe"
-       }
-     }
-   }
    ```
 
 If you use [Postman](https://www.postman.com/), make sure to checkout the [collection file](baseplate.postman_collection.json) for a quick way of interacting with various endpoints.

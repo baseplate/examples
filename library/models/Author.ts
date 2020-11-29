@@ -1,4 +1,4 @@
-import { BaseModel } from "@baseplate/mongodb";
+import {BaseModel} from '@baseplate/mongodb'
 
 export default class Author extends BaseModel {
   static base$fields = {
@@ -7,7 +7,7 @@ export default class Author extends BaseModel {
     // like `minLength` and `maxLength`.
     firstName: {
       type: String,
-      label: "First name",
+      label: 'First name',
       required: true,
       minLength: 1,
       maxLength: 85,
@@ -16,13 +16,13 @@ export default class Author extends BaseModel {
       },
     },
 
-    favouriteGenre: "Genre",
+    favouriteGenre: 'Genre',
 
     // Same as {type: String}.
     lastName: String,
     gender: {
       type: String,
-      enum: ["Male", "Female", "Other"],
+      enum: ['Male', 'Female', 'Other'],
     },
 
     // You can have nested fields.
@@ -48,7 +48,7 @@ export default class Author extends BaseModel {
         type: String,
 
         // You can specify your own validation function.
-        validate: (input: string) => input.startsWith("XYZ"),
+        validate: (input: string) => input.startsWith('XYZ'),
 
         // And configure the error message that is shown when it fails.
         errorMessage: 'Postcode must begin with "XYZ"',
@@ -57,7 +57,7 @@ export default class Author extends BaseModel {
       state: String,
       country: String,
     },
-  };
+  }
 
   //static base$index = [{ fields: { city: -1, state: 1 }, sparse: true }];
 }

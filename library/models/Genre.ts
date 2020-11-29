@@ -1,5 +1,5 @@
 export default {
-  name: "genre",
+  name: 'genre',
   fields: {
     name: {
       type: String,
@@ -16,13 +16,13 @@ export default {
     },
 
     // A model can reference itself.
-    parentGenre: "genre",
+    parentGenre: 'genre',
   },
   virtuals: {
     test2: {
       get() {
-        return "oh, hello there!";
+        return 'oh, hello there!'
       },
     },
   },
-};
+}
